@@ -12,9 +12,9 @@ async function startServer() {
   app.use(express.json());
 
   if (process.env.GEMINI_API_KEY) {
-    console.log("✅ Gemini API Key detected (Frontend will handle it).");
+    console.log("✅ AI API key detected (Frontend will handle it).);
   } else {
-    console.warn("⚠️ Gemini API Key NOT detected. Please add it in Settings > Secrets.");
+    console.warn("⚠️ AI API key NOT detected. Please add it to your environment.");
   }
 
   // Vite middleware for development

@@ -125,11 +125,11 @@ export class CognitiveAgent {
       currentTask: null
     };
     
-    // Initialize Gemini locally (Frontend)
+    // Initialize AI provider locally (Frontend)
     try {
       this.ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
     } catch (e) {
-      console.warn("Gemini initialization failed:", e);
+      console.warn("AI provider initialization failed:", e);
     }
   }
 
@@ -146,7 +146,7 @@ export class CognitiveAgent {
 
   private async callAI(messages: any[], useTools: boolean = true, retries: number = 3) {
     if (!this.ai || !process.env.GEMINI_API_KEY) {
-      throw new Error("Gemini API Key is not configured. Please add it in Settings > Secrets.");
+      throw new Error("AI API key is not configured. Please add it to your environment.");
     }
 
     const systemPrompt = messages.find(m => m.role === "system")?.content || MASTER_SYSTEM_PROMPT;
@@ -190,7 +190,7 @@ export class CognitiveAgent {
             }]
           };
         }
-        throw new Error("No response from Gemini");
+        throw new Error("No response from AI service");
       } catch (error: any) {
         const isRateLimit = error.message?.includes("429") || error.status === 429 || error.message?.includes("RESOURCE_EXHAUSTED");
         const isOverloaded = error.message?.includes("503") || error.status === 503 || error.message?.includes("UNAVAILABLE");
@@ -204,15 +204,15 @@ export class CognitiveAgent {
 
         console.error("Gemini API Error:", error);
         if (isRateLimit) {
-          throw new Error("Gemini API Quota Exceeded. Please wait a moment or check your usage limits at https://aistudio.google.com/app/plan");
+          throw new Error("AI API quota exceeded. Please wait a moment or check your usage limits.");
         }
         if (isOverloaded) {
-          throw new Error("Gemini API is currently overloaded. Please try again in a few seconds.");
+          throw new Error("AI service is currently overloaded. Please try again in a few seconds.");
         }
-        throw new Error(`Gemini API Error: ${error.message || "Unknown error"}`);
+        throw new Error(`AI API Error: ${error.message || "Unknown error"}`);
       }
     }
-    throw new Error("Failed to get response from Gemini after multiple retries.");
+    throw new Error("Failed to get response from the AI service after multiple retries.");
   }
 
   async run(objective: string) {

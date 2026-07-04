@@ -191,7 +191,7 @@ export default function App() {
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-3 px-4 py-1.5 bg-white/5 rounded-full border border-white/10">
               <Cpu className="w-3.5 h-3.5 text-pink-400" />
-              <span className="text-[10px] font-mono text-slate-300">Gemini (Free)</span>
+              <span className="text-[10px] font-mono text-slate-300">AI Engine</span>
             </div>
             {/* Connection Status Indicator */}
             <div className="flex items-center gap-2 px-3 py-1 bg-emerald-500/10 rounded-full border border-emerald-500/20">
