@@ -1,0 +1,5 @@
+{
+  "name": "Cognitive Task Engine",
+  "description": "Autonomous agent for complex long-horizon research and tasks with memory, planning, and sub-agent delegation.",
+  "requestFramePermissions": []
+}
